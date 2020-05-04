@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="bg" data-layout-decorate="~{fragments/layout-emp}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Админ</title>
+
+<script th:inline="javascript">
+
+      /*<![CDATA[*/
+	    
+
+      
+          var workProfile =/*[[${workHours}]]*/ "";
+          var datesProfile =/*[[${datesWork}]]*/ "";
+          
+         
+       /*]]>*/
+       
+       
+</script> 
+
+   <!-- Bootstrap -->
+    <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    
+    <!-- Custom Theme Style -->
+    <link href="/css/custom.min.css" rel="stylesheet">
+
+
+ <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/vendors/nprogress/nprogress.js"></script>
+    <!-- ECharts -->
+    <script src="/vendors/echarts/dist/echarts.min.js"></script>
+    <script src="/vendors/echarts/map/js/world.js"></script>
+
+    
+
+    
+</head>
+
+<body>
+
+	<div class="right_col" role="main" data-layout-fragment="content">
+		
+			
+			
+				<div class="page-title">
+					<div class="title_left">
+					
+					</div>
+ <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Информация за служител <small></small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                     
+                     
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left" th:each="employee : ${employees}">
+                      <div class="profile_img">
+                        <div id="crop-avatar">
+                          <!-- Current avatar -->
+                          <img class="img-responsive avatar-view" src="/images/user.png" alt="Avatar" title="Change the avatar">
+                        </div>
+                      </div>
+                      <h3 th:text="${employee.name} ">Samuel Doe</h3>
+
+                      <ul class="list-unstyled user_data">
+                        <li th:text="'Имейл: ' + ${employee.email}" >   </li>
+
+                        <li th:text="'Адрес: ' + ${employee.adress}">  </li>
+                        
+                        
+                        <li th:text="'Телефон: ' + ${employee.phoneNumber}"> </li>
+                        
+					   <li th:text="'Пол: ' + ${employee.gender}"> </li>
+					    
+					    <li th:text="'Заплата:  ' + ${employee.sallary} + ' лв.'"> </li>
+                     
+                      </ul>
+
+                      <a href="/employeer/employee/edit" class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Редактирай</a>
+                      <br />
+
+                    
+
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+
+                      <div class="profile_title">
+                        <div class="col-md-6">
+                          <h2>Активност на служител</h2>
+                        </div>
+                        
+                      </div>
+                       <!-- start of user-activity-graph -->
+                      
+                      <div id="echart_line" style="height:300px;"></div>
+                      <!-- end of user-activity-graph -->
+
+                      <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                          <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Последни действия</a>
+                          </li>
+
+                          <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Проекти</a>
+                          </li>
+
+                        
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                          <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                          <!-- end of user messages -->
+                        <ul class="messages">
+                         
+                          
+                          <li th:each="history : ${tasksHistory}" >
+                            <img src="/images/img.jpg" class="avatar" alt="Avatar">
+                            <div class="message_date">
+                              <h3 class="date text-error" >Дата</h3>
+                        <p th:text="${history.endDate}"> </p>
+                            </div>
+                            <div class="message_wrapper">
+                              <h4 class="heading" th:text="${history.nameEmployee}">Brian Michaels</h4>
+                              <blockquote class="message" th:text="${history.workDoneDescription}" >Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
+                              <br />
+                              <p class="url">
+                                <span class="fs1" aria-hidden="true" data-icon=""></span>
+                               
+                              </p>
+                            </div>
+                          </li>
+                         
+                         
+                        </ul>
+                        <!-- end of user messages -->
+
+                          </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+
+                            <!-- start user projects -->
+                            <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                      <thead>
+                        <tr>
+                          
+                          <th>Име</th>
+                          <th>Статус</th>
+                         
+                          <th>Започнат</th>
+                          <th>Крайна дата</th>
+                     	  <th>Часове</th>
+                       
+                          
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                     
+                         
+                           <tr th:each="project : ${projects}">
+		
+		
+		 
+		 
+	
+		 <td th:text="${project.name}"> Текст </td>
+
+		 <td th:text="${project.status}"> Текст </td>
+		  <td th:text="${project.start_date}"> Текст </td>
+		 
+		 
+		 <td th:text="${project.end_date}"> Текст </td>
+		 <td th:text="${project.total_Hour_Worked}"> Текст </td>
+	
+                        </tr>
+                      </tbody>
+                    </table>
+                            <!-- end user projects -->
+
+                          </div>
+                          <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                            <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
+                              photo booth letterpress, commodo enim craft beer mlkshk </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+				</div>
+				
+			
+			
+	</div>
+		<!-- /page content -->
+	
+
+
+	
+
+
+
+</body>
+</html>

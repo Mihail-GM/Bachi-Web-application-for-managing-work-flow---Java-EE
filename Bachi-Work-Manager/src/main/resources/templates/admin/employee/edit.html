@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="bg" data-layout-decorate="~{fragments/layout}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Админ</title>
+
+   <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+	<!-- validator -->
+	<script src="/vendors/validator/validator.js"></script>
+ 
+</head>
+<body>
+	<div class="right_col" role="main" data-layout-fragment="content">
+		<div class="right_col" role="main">
+			<div class="">
+				<div class="page-title">
+					<div class="title_left">
+						<h3>Добавяне на служител</h3>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Информация за новият служител</h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-up"></i></a></li>
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+
+								<form class="form-horizontal form-label-left" novalidate action="#"
+								 th:action="@{/admin/employee/edit}" method="post">
+
+
+
+
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Име  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12"  >
+                          <input  th:each="employee : ${personalEmployees}"
+                           th:value=" ${employee.name} "
+                           id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="2" 
+                          data-validate-words="2" name="name" required="required" type="text" >
+                        </div>
+                      </div>
+								
+
+					<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Имейл <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input th:each="employee : ${personalEmployees}"
+                           th:value=" ${employee.email} "  type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+
+
+									<div class="item form-group">
+										<div class="item">
+											<label for="dateofBirth"
+												class="control-label col-md-3 col-sm-3 col-xs-12">Дата
+												на раждане</label>
+
+											<div class="col-md-6 col-sm-6 col-xs-12" >
+												<input class="date" type="date" name="date"
+													required="required" th:each="employee : ${personalEmployees}"
+                           th:text=" 'Текущa ' + ${employee.birthday} ">
+											</div>
+
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12">Пол</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+
+											<div id="gender" class="btn-group" data-toggle="buttons">
+												<label class="btn btn-primary"
+												 th:each="employee : ${personalEmployees}" th:classappend="${employee.gender} == 'M' ? active : '' "
+													data-toggle-class="btn-primary"
+													data-toggle-passive-class="btn-default"> 
+													<input
+													type="radio" name="gender" value="М"
+													data-parsley-multiple="gender"> &nbsp; Мъж &nbsp;
+												</label> <label class="btn btn-primary"
+													data-toggle-class="btn-primary"
+													data-toggle-passive-class="btn-default"> <input
+													type="radio" name="gender" value="Ж"
+													data-parsley-multiple="gender"> Жена
+												</label>
+											</div>
+										</div>
+									</div>
+													
+									<div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Мениджър на служителя</label>
+				                        <div class="col-md-6 col-sm-6 col-xs-12">
+				                         
+				                            <select class="select2_single form-control" tabindex="-1" name="manager_id"  th:each="emp : ${personalEmployees}" >
+								                <option th:each="employee : ${employees}" 
+								                        th:value="${employee.managerID}" th:text="${employee.name}"
+								                         th:selected="${employee.managerID} == ${emp.managerID} ? true : false "
+								                         >Служител
+								                        
+								                        </option>
+								            </select>
+			                        </div>
+			                      </div>
+			                      
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="telephone">Телефонен номер <span
+											class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input  th:each="employee : ${personalEmployees}"
+                           th:value=" ${employee.phoneNumber} "   type="tel" id="telephone" name="phone"
+												required="required" data-validate-length-range="8,20"
+												class="form-control col-md-7 col-xs-12">
+										</div>
+									</div>
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="textarea">Адрес <span class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<textarea    th:each="employee : ${personalEmployees}"
+                           th:text=" ${employee.adress} "  id="textarea" required="required" name="adress"
+												 data-parsley-maxlength="100"  data-parsley-minlength="20" class="form-control col-md-7 col-xs-12"></textarea>
+										</div>
+									</div>
+									
+										<input hidden th:each="employee : ${personalEmployees}"
+                           th:text=" ${employee.password} "   type="text" id="number" name="password">
+									
+										<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="number">Заплата <span class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input th:each="employee : ${personalEmployees}"
+                           th:value=" ${employee.sallary} "   type="number" id="number" name="salary"
+												required="required" data-validate-minmax="1,1000000000"
+												class="form-control col-md-7 col-xs-12">
+										</div>
+									</div>
+									
+									
+										<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="number">ID <span class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input th:each="employee : ${personalEmployees}"
+                           th:value=" ${employee.id} "   type="number" id="number" name="id"
+												required="required" data-validate-minmax="1,1000000000"
+												class="form-control col-md-7 col-xs-12">
+										</div>
+									</div>
+									
+									
+			                      
+			                      <div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Активен</label>
+				                        <div class="col-md-9 col-sm-9 col-xs-12">
+				                          <select class="form-control" name="active" >
+				                            
+				                 
+				                            <option value="1">Активен</option>
+				                            <option value="0">Неактивен</option>
+				                           
+				                          </select>
+				                        </div>
+				                      </div>
+			                      
+			                      
+
+									<div class="ln_solid"></div>
+									<div class="form-group">
+										<div class="col-md-6 col-md-offset-3">
+											<button type="reset" class="btn btn-primary">Отказ</button>
+											<button id="send" type="submit" class="btn btn-success">Добави</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /page content -->
+	</div>
+
+
+	<!-- jQuery -->
+	<script src="/webjars/jquery/2.2.3/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- FastClick -->
+	<script src="/webjars/fastclick/1.0.6/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="/webjars/nprogress/0.2.0/nprogress.js"></script>
+	<!-- validator -->
+	<script src="/js/validator/validator.js"></script>
+	<script src="/js/validator.js"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="/js/custom.min.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="bg" data-layout-decorate="~{fragments/layout-emp}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Админ</title>
+
+  <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+	<!-- validator -->
+
+ <script src="/vendors/validator/validator.js"></script>
+ 
+
+    
+</head>
+
+<body>
+
+	<div class="right_col" role="main" data-layout-fragment="content">
+	
+			<div class="">
+				<div class="page-title">
+					<div class="title_left">
+						<h3>Добавяне на съобщение за помощ</h3>
+					</div>
+
+
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Информация за исканата помощ</h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-up"></i></a></li>
+
+
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+
+								<form class="form-horizontal form-label-left" novalidate
+									action="#" th:action="@{/employeer/support/new-ticket}"  method="post">
+
+
+
+		<div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Към служител</label>
+				                        <div class="col-md-6 col-sm-6 col-xs-12">
+				                         
+				                            <select class="select2_single form-control" tabindex="-1" name="employeeSelected">
+								                <option th:each="employee : ${employees}" 
+								                        th:value="${employee.id}" th:text="${employee.name}">Служител</option>
+								            
+								            </select>
+				    
+                          
+			                        </div>
+			                      </div>
+			                      
+
+
+   <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Съобщението  <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="name" class="form-control col-md-7 col-xs-12"   name="description"
+                           placeholder="" required="required" type="text">
+                        </div>
+                      </div>
+                      
+								
+
+
+			                      
+
+
+									<div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Приоритет</label>
+				                        <div class="col-md-9 col-sm-9 col-xs-12">
+				                          <select class="form-control" name="priority" >
+				                            <option>Изберете приоритет</option>
+				                            <option value="1">Нисък</option>
+				                            <option value="2">Среден</option>
+				                            <option value="3">Висок</option>
+				                            <option value="4">Спешен</option>
+				                          </select>
+				                        </div>
+				                      </div>
+
+
+									<div class="ln_solid"></div>
+									<div class="form-group">
+										<div class="col-md-6 col-md-offset-3">
+											<button type="reset" class="btn btn-primary">Отказ</button>
+											<button id="send" type="submit" class="btn btn-success">Добави</button>
+										</div>
+									</div>
+								</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<!-- /page content -->
+	</div>
+
+
+	
+
+
+
+
+
+</body>
+</html>

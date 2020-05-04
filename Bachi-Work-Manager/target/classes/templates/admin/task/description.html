@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="bg" data-layout-decorate="~{fragments/layout}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Админ</title>
+
+<script th:inline="javascript">
+
+      /*<![CDATA[*/
+	    
+          var message1 =/*[[${message}]]*/ "";
+      
+          var work =/*[[${workHours}]]*/ "";
+          var complete =/*[[${completeNow}]]*/ "";
+          var dates =/*[[${datesWork}]]*/ "";
+          
+         
+       /*]]>*/
+       
+       
+</script> 
+
+ <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+	<!-- validator -->
+
+ <script src="/vendors/validator/validator.js"></script>
+ 
+    <script src="/vendors/echarts/dist/echarts.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+	<div class="right_col" role="main" data-layout-fragment="content">
+		 <!-- page content -->
+ 
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Детайли за задача | номер:<small th:text="${id_task}">  </small></h3>
+              </div>
+
+              
+            </div>
+            
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                     
+                    <h2 th:text="'Наименование - ' + ${name}"></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+
+                      <ul class="stats-overview">
+                        <li>
+                          <span class="name"> Сатутс </span>
+                          <span class="value text-success"> Активен </span>
+                        </li>
+                        <li>
+                          <span class="name"> Приоритет</span>
+                          <span class="value text-success" > Среден </span>
+                        </li>
+                        <li class="hidden-phone">
+                          <span class="name"> Прогрес </span>
+                          <span class="value text-success" th:text="${complete} + '%'">  </span>
+                          
+                         
+                    
+                        </li>
+                      </ul>
+                      <br />
+
+                      <div id="mainb" style="height:350px;"></div>
+
+                      <div>
+
+<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Добавяне изработено по тази задача </h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-down"></i></a></li>
+
+
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content" style="display: none;">
+
+								<form class="form-horizontal form-label-left" novalidate  
+									action="#" th:action="@{/admin/task/add-task-history}" th:object="${task}" method="post">
+
+
+
+
+ <div class="item form-group">
+							
+										<div class="col-md-6 col-sm-6 col-xs-12"> 
+											 <input type="hidden"   th:value="${id_task}" name="id_task"/>   
+										</div>
+									</div>
+									
+                 
+			                      
+                      <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Описание на работата</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <textarea required="required" name = "description"   class="resizable_textarea form-control"  style="margin: 0px 6.4px 0px 0px; height: 94px; width: 100%;"></textarea>
+                    </div>
+                  </div>
+                  
+                  
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Описание на проблем</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <textarea name = "issue_description"  class="resizable_textarea form-control" placeholder="Тук може да въведете информация за проблеми, които са възникнали..." style="margin: 0px 6.4px 0px 0px; height: 64px; width: 100%;"></textarea>
+                    </div>
+                  </div>
+                  
+
+
+									<div class="item form-group">
+										<div class="item">
+											<label for="dateofBirth"
+												class="control-label col-md-3 col-sm-3 col-xs-12">Дата
+												начало</label>
+
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input class="date" type="date" name="startDate"
+													required="required">
+											</div>
+
+										</div>
+									</div>
+
+
+
+									<div class="item form-group">
+										<div class="item">
+											<label for="dateofBirth"
+												class="control-label col-md-3 col-sm-3 col-xs-12">Дата
+												край</label>
+
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input class="date" type="date" name="endDate"
+													required="required">
+											</div>
+
+										</div>
+									</div>
+									
+									
+									
+				             	 <div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Статус</label>
+				                        <div class="col-md-9 col-sm-9 col-xs-12">
+				                          <select class="form-control" name="status" >
+				                            
+				                            <option value="1">Очакване на одобрение</option>
+				                            <option value="2">Активен</option>
+				                            <option value="3">Очакване на отговор</option>
+				                            <option value="4">Завършен</option>
+				                          </select>
+				                        </div>
+				                      </div>
+			                      
+			                      
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="number">Изработени часове <span class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12"> 
+											<input type="number" id="number" name="totalHours"
+												required="required" data-validate-minmax="1,24"
+												class="form-control col-md-7 col-xs-12">
+										</div>
+									</div>
+									
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="number">Прогрес % <span class="required" >*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12" > 
+											<input type="number"  th:value="${complete} " id="number" name="progress"
+												required="required" 
+												class="form-control col-md-7 col-xs-12" >
+										</div>
+									</div>
+
+
+				
+
+
+									<div class="ln_solid"></div>
+									<div class="form-group">
+										<div class="col-md-6 col-md-offset-3">
+											<button type="reset" name="action" value="cancel"  class="btn btn-primary">Отказ</button>
+											<button id="send" type="submit" name="action" value="taskhistory"  class="btn btn-success">Добави</button>
+										</div>
+									</div>
+								</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Редактиране на задачата </h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-down"></i></a></li>
+
+
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content" style="display: none;">
+
+								<form class="form-horizontal form-label-left" novalidate
+									action="#" th:action="@{/admin/task/update-task-success}"  method="post">
+
+
+
+									 <input type="hidden"   th:value="${id_task}" name="id_task"/>   
+
+		  	  
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="name">Име <span class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" name="name_task" id="name" required="required" th:value="${name}"
+												class="form-control col-md-7 col-xs-12 parsley-success"
+												data-parsley-id="5">
+											<ul class="parsley-errors-list" id="parsley-id-5"></ul>
+										</div>
+									</div>
+
+								
+				             	  <div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Проект</label>
+				                        <div class="col-md-6 col-sm-6 col-xs-12">
+				                         
+				                            <select class="select2_single form-control"  name="ProjectSelected_task"  tabindex="-1" >
+								                <option th:each="project : ${projects}" 
+								                        th:value="${project.getId_project()}" th:selected="${project.getId_project()}  == ${project_ID} ? true : false "  th:text="${project.name}">Проект
+								                		  
+								                </option>
+								                  
+								            </select>
+				    
+                          
+			                        </div>
+			                      </div>
+			                      
+			          <!-- end of user messages       
+                      <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Информация за задачата</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                            <h4> Текуща:</h4>
+                        <p th:text="${description} "> </p>
+                      <textarea name = "description_task"  placeholder="Тук може да въведете нова информация за Вашата задача..."  class="resizable_textarea form-control" th:field = "${description}" style="margin: 0px 6.4px 0px 0px; height: 94px; width: 100%;" ></textarea>
+                 
+                    </div>
+                  </div>
+                   -->        
+                   <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Описание на работата</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <textarea required="required" name = "description_task"   class="resizable_textarea form-control"  style="margin: 0px 6.4px 0px 0px; height: 94px; width: 100%;"></textarea>
+                    </div>
+                  </div>
+                  
+
+
+									<div class="item form-group">
+										<div class="item">
+											<label for="dateofBirth"
+												class="control-label col-md-3 col-sm-3 col-xs-12">Дата
+												начало</label>
+												
+
+											
+											<div class="col-md-6 col-sm-6 col-xs-12">
+											  
+												<input class="date" type="date" name="startDate_task"
+													required="required ">
+													<h4 th:text="'Текуща ' + ${start_date}"> Текст </h4>
+											</div>
+											
+										
+											
+											
+										
+												
+
+										</div>
+									</div>
+
+
+
+									<div class="item form-group">
+										<div class="item">
+											<label for="dateofBirth"
+												class="control-label col-md-3 col-sm-3 col-xs-12">Дата
+												край</label>
+
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input class="date" type="date" name="endDate_task"
+													required="required"  >
+													<h4 th:text="'Текуща ' + ${end_date}"> Текст </h4>
+											</div>
+											
+										
+											
+										</div>
+									</div>
+									
+									
+									
+				             	  <div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Служител</label>
+				                        <div class="col-md-6 col-sm-6 col-xs-12">
+				                         
+				                            <select class="select2_single form-control" tabindex="-1" name="employeeSelected_task">
+								                <option th:each="employee : ${employees}" 
+								                        th:value="${employee.id}" th:text="${employee.name}" 
+								                        th:selected="${employee.id} == ${empID} ? true : false " >
+								                        
+								                        Служител
+								                        
+								                </option>
+								            
+								            </select>
+				    
+                          
+			                        </div>
+			                      </div>
+			                      
+			                      
+
+									<div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="number">Нужни часове <span class="required">*</span>
+										</label>
+										
+										
+										<div class="col-md-6 col-sm-6 col-xs-12" > 
+											<input type="number"  th:value="${totalHours} " id="numberHours" name="totalHours_task"
+												required="required" 
+												class="form-control col-md-7 col-xs-12" >
+										</div>
+									</div>
+
+									<div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Приоритет</label>
+				                        <div class="col-md-9 col-sm-9 col-xs-12">
+				                          <select class="form-control" name="priority_task" >
+				                            <option>Изберете приоритет</option>
+				                               <option value="1"  th:selected="${status_id} == 1 ? true : false ">Нисък</option>
+				                            <option value="2" th:selected="${status_id} == 2 ? true : false">Среден</option>
+				                            <option value="3" th:selected="${status_id} == 3 ? true : false">Висок</option>
+				                            <option value="4" th:selected="${status_id} == 4? true : false">Спешен</option>
+				                          </select>
+				                        </div>
+				                      </div>
+				                      
+				                      
+									<div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Статус</label>
+				                        <div class="col-md-9 col-sm-9 col-xs-12">
+				                          <select class="form-control" name="statusID" >
+				                            <option>Статус</option>
+				                            <option value="1"   th:selected="${status_id} == 1 ? true : false ">Очакване на одобрение</option>
+				                            <option value="2"   th:selected="${status_id} == 2 ? true : false ">Активен</option>
+				                            <option value="3"   th:selected="${status_id} == 3 ? true : false ">Очакване на отговор</option>
+				                            <option value="4"   th:selected="${status_id} == 4 ? true : false ">Завършен</option>
+				                          </select>
+				                        </div>
+				                      </div>
+				                      
+				                      <div class="item form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="number">Прогрес % <span class="required" >*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12" > 
+											<input type="number"  th:value="${complete} " id="number" name="task_progres_task"
+												required="required" 
+												class="form-control col-md-7 col-xs-12" >
+										</div>
+									</div>
+
+
+									<div class="ln_solid"></div>
+									<div class="form-group">
+										<div class="col-md-6 col-md-offset-3">
+											<button type="reset" class="btn btn-primary">Отказ</button>
+											<button id="send" type="submit" name="action" value="update_task"  class="btn btn-success">Обнови</button>
+										</div>
+									</div>
+								</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+                        <h4>Последни действия</h4>
+
+                        <!-- end of user messages -->
+                        <ul class="messages">
+                         
+                          
+                          <li th:each="history : ${tasksHistory}" >
+                            <img src="/images/img.jpg" class="avatar" alt="Avatar">
+                            <div class="message_date">
+                              <h3 class="date text-error" >Дата</h3>
+                        <p th:text="${history.endDate}"> </p>
+                            </div>
+                            <div class="message_wrapper">
+                              <h4 class="heading" th:text="${history.nameEmployee}">Brian Michaels</h4>
+                              <blockquote class="message" th:text="${history.workDoneDescription}" >Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
+                              <br />
+                              <p class="url">
+                                <span class="fs1" aria-hidden="true" data-icon=""></span>
+                               
+                              </p>
+                            </div>
+                          </li>
+                         
+                         
+                        </ul>
+                        <!-- end of user messages -->
+
+
+                      </div>
+
+
+                    </div>
+
+                    <!-- start project-detail sidebar -->
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+
+                      <section class="panel">
+
+                        <div class="x_title">
+                          <h2>Описание</h2>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div class="panel-body">
+                          <h3 class="green"><i class="fa fa-paint-brush"></i> Задание</h3>
+
+                          <p th:text="${description}"> </p>
+                          <br />
+
+                          
+
+                         
+                        </div>
+
+                      </section>
+
+                    </div>
+                    <!-- end project-detail sidebar -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+        <!-- /page content -->
+	</div>
+
+
+
+
+
+</body>
+</html>

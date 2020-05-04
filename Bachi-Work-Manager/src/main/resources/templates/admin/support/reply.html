@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="bg" data-layout-decorate="~{fragments/layout}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Админ</title>
+
+  <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+	<!-- validator -->
+
+ <script src="/vendors/validator/validator.js"></script>
+ 
+
+    
+</head>
+
+<body>
+
+	<div class="right_col" role="main" data-layout-fragment="content">
+	
+			<div class="">
+				<div class="page-title">
+					<div class="title_left">
+						
+					</div>
+
+
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Информация за поисканата помощ </h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-up"></i></a></li>
+
+
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+<h2 th:each="employee : ${employees}" th:text="'Създаден от служител: ' + ${employee.name} ">Samuel Doe</h2>
+
+			<ul class="messages">
+                         
+                          
+                          <li th:each="sup : ${support}" >
+                           
+                            <div class="message_date">
+                              <h3 class="date text-error" >Дата</h3>
+                        <p th:text="${sup.date}"> </p>
+                            </div>
+                            <div class="message_wrapper">
+                              <h4 class="heading" th:text="'Приоритет: ' + ${sup.priorithy}">Brian Michaels</h4>
+                              <blockquote class="message" th:text="${sup.description}" >Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
+                              <br />
+                              <p class="url">
+                                <span class="fs1" aria-hidden="true" data-icon=""></span>
+                               
+                              </p>
+                            </div>
+                          </li>
+                         
+                         
+                        </ul>
+
+
+								<form class="form-horizontal form-label-left" novalidate
+									action="#" th:action="@{/admin/support/reply}"  method="post">
+
+ <input type="hidden"   th:value="${ticketID}" name="ticketID"/>  
+ <input type="hidden"   th:value="${employeeOwnerID}" name="idEmployee"/>                
+	
+
+	    <input type="hidden"   th:value="${pririthyID}" name="priotityIDSend"/>
+	    
+	
+
+
+              	
+								<div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="textarea">Съобщение<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <textarea id="textarea" placeholder="Тук въведете вашият отговор..." data-validate-length-range="500"  required="required" name="description" class="form-control col-md-7 col-xs-12" ></textarea>
+                        </div>
+                      </div>
+                      
+                         
+			                      <div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Статут</label>
+				                        <div class="col-md-9 col-sm-9 col-xs-12">
+				                          <select class="form-control" name="active" >
+				                            
+				                 
+				                            <option value="1">Решен</option>
+				                            <option value="0">Нерешен</option>
+				                           
+				                          </select>
+				                        </div>
+				                      </div>
+                      
+								
+
+
+			                      
+
+
+									<div class="ln_solid"></div>
+									<div class="form-group">
+										<div class="col-md-6 col-md-offset-3">
+										
+											<button id="send" type="submit" class="btn btn-success">Отговор</button>
+										</div>
+									</div>
+								</form>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<!-- /page content -->
+	</div>
+
+
+	
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="bg" data-layout-decorate="~{fragments/layout-emp}">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- Meta, title, CSS, favicons, etc. -->
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Админ</title>
+
+  <!-- jQuery -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+	<!-- validator -->
+
+ <script src="/vendors/validator/validator.js"></script>
+ 
+
+</head>
+
+<body>
+
+	<div class="right_col" role="main" data-layout-fragment="content">
+		<div class="right_col" role="main">
+			<div class="">
+				<div class="page-title">
+					<div class="title_left">
+						<h3>Добавяне на събитие</h3>
+					</div>
+
+
+				</div>
+				<div class="clearfix"></div>
+
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="x_panel">
+							<div class="x_title">
+								<h2>Информация за новото събитие</h2>
+								<ul class="nav navbar-right panel_toolbox">
+									<li><a class="collapse-link"><i
+											class="fa fa-chevron-up"></i></a></li>
+
+
+								</ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="x_content">
+
+								<form class="form-horizontal form-label-left" novalidate
+									action="#" th:action="@{/employeer/events/add}" method="post">
+
+
+
+
+									<div class="form-group">
+										<label class="control-label col-md-3 col-sm-3 col-xs-12"
+											for="name">Име на събитието <span class="required">*</span>
+										</label>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<input type="text" name="name" id="name" required="required"
+												class="form-control col-md-7 col-xs-12 parsley-success"
+												data-parsley-id="5">
+											<ul class="parsley-errors-list" id="parsley-id-5"></ul>
+										</div>
+									</div>
+
+				<div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Описание на събитието</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <textarea required="required" name = "description"   class="resizable_textarea form-control"  style="margin: 0px 6.4px 0px 0px; height: 94px; width: 100%;"></textarea>
+                    </div>
+                  </div>
+									
+								
+
+
+
+
+
+									<div class="item form-group">
+										<div class="item">
+											<label for="dateofBirth"
+												class="control-label col-md-3 col-sm-3 col-xs-12">Дата
+												начало</label>
+
+											<div class="col-md-6 col-sm-6 col-xs-12">
+												<input class="date" type="date" name="startDate"
+													required="required">
+											</div>
+
+										</div>
+									</div>
+
+
+
+
+									
+
+									 <div class="form-group">
+				                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Приоритет</label>
+				                        <div class="col-md-9 col-sm-9 col-xs-12">
+				                          <select class="form-control" name="priority" >
+				                            
+				                            <option value="1">Нисък</option>
+				                            <option value="2">Среден</option>
+				                            <option value="3">Висок</option>
+				                            <option value="4">Спешен</option>
+				                          </select>
+				                        </div>
+				                      </div>
+
+								
+
+
+									<div class="ln_solid"></div>
+									<div class="form-group">
+										<div class="col-md-6 col-md-offset-3">
+											<button type="reset" class="btn btn-primary">Отказ</button>
+											<button id="send" type="submit" class="btn btn-success">Добави</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /page content -->
+	</div>
+
+
+	
+
+
+
+</body>
+</html>
